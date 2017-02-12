@@ -1,13 +1,19 @@
 ---
-apiVersion: v1
-kind: Pod
+apiVersion: extensions/v1beta1
+kind: Deployment
 metadata:
   name: ray-worker
   labels:
     app: ray-worker
 spec:
-  containers:
-  - name: ray-worker
-    image: us.gcr.io/prophet-158422/ray
-    command: [ "/bin/bash", "-c", "--" ]
-    args: ["/ray/scripts/start_ray.sh --redis-address ray-head.default.svc.cluster.local:6379 && while true; do sleep 30; done;"]
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: ray-worker
+    spec:
+      containers:
+      - name: ray-worker
+        image: us.gcr.io/prophet-158422/ray
+        command: [ "/bin/bash", "-c", "--" ]
+        args: ["/ray/scripts/start_ray.sh --redis-address ray-head.default.svc.cluster.local:6379 && while true; do sleep 30; done;"]
