@@ -23,4 +23,4 @@ spec:
             fieldRef:
               fieldPath: status.podIP 
         command: [ "/bin/bash", "-c", "--" ]
-        args: ["/ray/scripts/start_ray.sh --node-ip-address $MY_POD_IP --redis-address ray-head.default.svc.cluster.local:6379 --object-manager-port 12345 && while true; do sleep 30; done;"]
+        args: ["/ray/scripts/start_ray.sh --node-ip-address $MY_POD_IP --redis-address $(python -c 'import socket;import sys; sys.stdout.write(socket.gethostbyname(\"ray-head.default.svc.cluster.local\"));sys.stdout.flush()'):6379 --object-manager-port 12345 && while true; do sleep 30; done;"]
