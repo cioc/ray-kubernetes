@@ -4,8 +4,10 @@ kind: Service
 metadata:
   name: ray-head
 spec:
+  type: "LoadBalancer"
   ports:
   - port: 6379
+    targetPort: 6379
   selector:
     app: ray-head
 ---
