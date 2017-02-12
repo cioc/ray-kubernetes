@@ -21,5 +21,5 @@ spec:
     image: us.gcr.io/prophet-158422/ray
     ports:
     - containerPort: 6379
-    command:
-    - /ray/scripts/start_ray.sh --head --redis-port 6379
+    command: [ "/bin/bash", "-c", "--" ]
+    args: ["/ray/scripts/start_ray.sh --head --redis-port 6379 && while true; do sleep 30; done;"]
