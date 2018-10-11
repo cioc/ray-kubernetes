@@ -1,1 +1,1 @@
-docker build . -t us.gcr.io/prophet-158422/ray
+docker build . -t gcr.io/tutorial-218804/kube-cluster-demo
