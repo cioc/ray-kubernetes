@@ -24,14 +24,18 @@ metadata:
 spec:
   containers:
   - name: ray-head
-    image: us.gcr.io/prophet-158422/ray
+    image: gcr.io/tutorial-218804/kube-cluster-demo
     env:
     - name: MY_POD_IP
       valueFrom:
         fieldRef:
-          fieldPath: status.podIP 
+          fieldPath: status.podIP
     ports:
     - containerPort: 6379
     - containerPort: 12345
     command: [ "/bin/bash", "-c", "--" ]
-    args: ["/ray/scripts/start_ray.sh --head --redis-port 6379 --object-manager-port 12345 --node-ip-address $MY_POD_IP && while true; do sleep 30; done;"]
+    args:
+      - "ray start --head --redis-port 6379 --object-manager-port 12345 --node-ip-address $MY_POD_IP &&
+        echo id_rsa.pub is -;
+        more ~/.ssh/id_rsa.pub
+        && while true; do sleep 30; done;"

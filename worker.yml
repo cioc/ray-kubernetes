@@ -14,13 +14,25 @@ spec:
     spec:
       containers:
       - name: ray-worker
-        image: us.gcr.io/prophet-158422/ray
+        image: gcr.io/tutorial-218804/kube-cluster-demo
         ports:
         - containerPort: 12345
         env:
         - name: MY_POD_IP
           valueFrom:
             fieldRef:
-              fieldPath: status.podIP 
+              fieldPath: status.podIP
         command: [ "/bin/bash", "-c", "--" ]
-        args: ["/ray/scripts/start_ray.sh --node-ip-address $MY_POD_IP --redis-address $(python -c 'import socket;import sys; sys.stdout.write(socket.gethostbyname(\"ray-head.default.svc.cluster.local\"));sys.stdout.flush()'):6379 --object-manager-port 12345 && while true; do sleep 30; done;"]
+        args:
+          - "ray start --node-ip-address $MY_POD_IP --redis-address $(python -c 'import socket;import sys; sys.stdout.write(socket.gethostbyname(\"ray-head.default.svc.cluster.local\"));sys.stdout.flush()'):6379 --object-manager-port 12345;
+            mkdir /root/.ssh/;
+            touch /root/.ssh/authorized_keys;
+            sleep 3;
+            echo '<PASTE-PUBKEY-HERE-ONELINE>' >> ~/.ssh/authorized_keys;
+            service ssh restart;
+            sleep 3;
+            service ssh restart;
+            echo This worker IP $MY_POD_IP
+            && while true; do sleep 30; done;"
+
+      #no
