@@ -2,7 +2,7 @@ FROM ubuntu:xenial
 RUN apt-get update \
     && apt-get install -y vim git wget \
     && apt-get install -y cmake build-essential autoconf curl libtool libboost-all-dev unzip \
-    && apt-get install -y python3-pip
+    && apt-get install -y python3-pip \
     && alias python=python3
 RUN pip3 install --upgrade pip
 RUN pip install ray
