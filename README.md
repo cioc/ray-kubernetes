@@ -53,7 +53,7 @@ First, get into your `ray-head` with `kubectl exec -it ray-head bash`. Then run:
 ```
 python /ray-kubernetes/test_cluster.py $MY_POD_IP:6379
 ```
-You can choose to define # of remote objects by passing in an additional parameter. (e.g. `python /ray-kubernetes/test_cluster.py $MY_POD_IP:6379 8888`). Default is set to 136.
+You can choose to define # of actors by passing in an additional parameter. (e.g. `python /ray-kubernetes/test_cluster.py $MY_POD_IP:6379 8888`). Default is set to 136. `#-of-actors` should be no more than `# of CPU cores` in your cluster (`not # of CPUs`)
 Your expected run-time should be ~`2.5` seconds, but might be slower due to reaching cluster's max CPU capacity.
 
 # Notes
