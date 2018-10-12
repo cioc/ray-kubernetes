@@ -3,6 +3,7 @@
 Many thanks to the instructions by Robert and Charles: found on [here](https://github.com/robertnishihara/ray-kubernetes/blob/instructions/README.md)
 ## Instructions
 **For most up-to-date set-up instructions:** [Medium Blog Post](https://medium.com/@apengjh/4634a51effc9)
+
 ray-project [here](https://github.com/ray-project/ray)
 #### Setup Google Cloud and Install Cloud SDK
 Follow instructions from Google [here](https://cloud.google.com/sdk/docs/quickstart-debian-ubuntu) to install Cloud SDK for Ubuntu.
