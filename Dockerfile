@@ -2,13 +2,16 @@ FROM ubuntu:xenial
 RUN apt-get update \
     && apt-get install -y vim git wget \
     && apt-get install -y cmake build-essential autoconf curl libtool libboost-all-dev unzip \
-    && apt-get install -y python-pip
-RUN pip install --upgrade pip
-RUN git clone https://github.com/robertnishihara/ray.git
+    && apt-get install -y python3-pip
+    && alias python=python3
+RUN pip3 install --upgrade pip
+RUN pip install ray
+RUN export LC_ALL=C.UTF-8 \
+    && export LANG=C.UTF-8
 RUN git clone https://github.com/jhpenger/ray-kubernetes.git
 RUN pip install numpy
-#RUN cd /ray \
- #   && git checkout storeport
+
+
 
 #install additional dependencies
 RUN apt-get update \
@@ -34,11 +37,3 @@ RUN apt-get update \
 
 RUN ssh-keygen -f /root/.ssh/id_rsa -P "" \
     && echo "StrictHostKeyChecking no" >> /etc/ssh/ssh_config
-
-#COPY start_ray.py /ray/scripts/start_ray.py
-#COPY . ray-kubernetes-repo
-
-RUN cd /ray \
-    && ./build.sh \
-    && cd python \
-    && pip install -e .
