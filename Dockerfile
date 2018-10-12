@@ -5,9 +5,6 @@ RUN apt-get update \
     && apt-get install -y python3-pip \
     && alias python=python3
 RUN pip3 install --upgrade pip
-RUN pip install ray
-RUN export LC_ALL=C.UTF-8 \
-    && export LANG=C.UTF-8
 RUN git clone https://github.com/jhpenger/ray-kubernetes.git
 RUN pip install numpy
 
@@ -34,6 +31,8 @@ RUN apt-get update \
     && pip install jupyter \
     && pip install lz4
 
+RUN export LC_ALL=C.UTF-8 \
+    && export LANG=C.UTF-8
 
 RUN ssh-keygen -f /root/.ssh/id_rsa -P "" \
     && echo "StrictHostKeyChecking no" >> /etc/ssh/ssh_config
