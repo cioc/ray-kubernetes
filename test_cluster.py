@@ -8,8 +8,8 @@ import time
 import sys
 
 if 3 < len(sys.argv) < 2:
-    print("Usage: python test_cluster.py <redis-address> <#-of-remote-funcs>")
-    print("<#-of-remote-funcs> OPTIONAL, default = 136")
+    print("Usage: python test_cluster.py <redis-address> <#-of-ray-actors>")
+    print("<#-of-ray-actors> OPTIONAL, default = 136")
     exit()
 
 ray.init(sys.argv[1])
@@ -28,10 +28,10 @@ class Foo(object):
         return self.counter
 
 try:
-    num_of_remote_functions = int(sys.argv[3])
+    num_of_actors = int(sys.argv[3])
 except:
-    num_of_remote_functions = 68*2
-Foos = [Foo.remote() for _ in range(num_of_remote_functions)]
+    num_of_actors = 68*2
+Foos = [Foo.remote() for _ in range(num_of_actors)]
 
 
 
@@ -67,6 +67,6 @@ duration = end_time - start_time
 #                        'fast.'.format(duration))
 
 print(results)
-print("Usage: python test_cluster.py <redis-address> <#-of-remote-funcs> \n <#-of-remote-funcs> OPTIONAL, default = 136")
+print("Usage: python test_cluster.py <redis-address> <#-of-ray-actors> \n <#-of-ray-actors> OPTIONAL, default = 136")
 print('Success! The example took {} seconds.'.format(duration))
-print('Num of remote functions = %d' %num_of_remote_functions)
+print('Num of ray actors = %d' %num_of_remote_functions)
